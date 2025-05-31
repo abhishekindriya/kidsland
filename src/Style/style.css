@@ -9,6 +9,9 @@ header a {
 
 /* Product List Design */
 
+.product-card {
+  transition: transform 0.2s ease-in-out;
+}
 
 
 .product-card {

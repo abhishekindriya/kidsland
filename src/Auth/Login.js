@@ -5,8 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
+import { useRef } from "react";
+import { Toast } from 'primereact/toast';
+
 
 const LoginForm = () => {
+  const toast = useRef(null);
+
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -28,6 +33,12 @@ const LoginForm = () => {
 
         if (res?.data?.status === 200 && res?.data?.success) {
           localStorage.setItem("token", res.data.token);
+          // toast.current.show({
+          //   severity: 'success',
+          //   summary: `Success!`,
+          //   detail: 'Login successfully',
+          //   life: '2500',
+          // });
           navigate("/");
         }
       } catch (err) {
@@ -39,51 +50,56 @@ const LoginForm = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div className="col-12 md:col-6 md:col-offset-3">
-        <div className="grid mx-0 mt-0">
-          <div className="col-12 md:col-6">
-            <FloatLabel>
-              <InputText
-                type="email"
-                name="email"
-                placeholder="Email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
-              />
-            </FloatLabel>
-            {formik.touched.email && formik.errors.email && (
-              <div style={{ color: "red" }}>{formik.errors.email}</div>
+    <>
+      <Toast ref={toast} />
+
+      <form onSubmit={formik.handleSubmit}>
+
+        <div className="col-12 md:col-6 md:col-offset-3">
+          <div className="grid mx-0 mt-0">
+            <div className="col-12 md:col-6">
+              <FloatLabel>
+                <InputText
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                />
+              </FloatLabel>
+              {formik.touched.email && formik.errors.email && (
+                <div style={{ color: "red" }}>{formik.errors.email}</div>
+              )}
+            </div>
+
+            <div>
+              <FloatLabel>
+                <InputText
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+              </FloatLabel>
+              {formik.touched.password && formik.errors.password && (
+                <div style={{ color: "red" }}>{formik.errors.password}</div>
+              )}
+            </div>
+
+            {formik.errors.general && (
+              <div style={{ color: "red" }}>{formik.errors.general}</div>
             )}
+
+            <Button type="submit" disabled={formik.isSubmitting}>
+              {formik.isSubmitting ? "Logging in..." : "Login"}
+            </Button>
           </div>
-
-          <div>
-            <FloatLabel>
-              <InputText
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-              />
-            </FloatLabel>
-            {formik.touched.password && formik.errors.password && (
-              <div style={{ color: "red" }}>{formik.errors.password}</div>
-            )}
-          </div>
-
-          {formik.errors.general && (
-            <div style={{ color: "red" }}>{formik.errors.general}</div>
-          )}
-
-          <Button type="submit" disabled={formik.isSubmitting}>
-            {formik.isSubmitting ? "Logging in..." : "Login"}
-          </Button>
         </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 }
 export default LoginForm

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const ProductListing = async (payload, id) => {
   const response = await axios.get(

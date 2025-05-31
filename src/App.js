@@ -3,21 +3,16 @@ import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
-import './Style/style.css'
-
-import Login from "./Auth/Login";
-import Register from "./Auth/Register";
-import Products from "./Components/Products";
-import Header from "./HeaderFooter/Header";
-import ComingSoon from './CommingSoon/ComingSoonComponent'
-
-
-import ProtectedRoute from "./Auth/ProtectedRoute";
-
+import './Style/style.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Components/Home";
 import Cart from "./Components/Cart-Items";
 import Footer from "./HeaderFooter/Footer";
+import Header from "./HeaderFooter/Header";
+import Login from "./Auth/Login"
+import Register from "./Auth/Register"
+import ComingSoon from "./CommingSoon/ComingSoonComponent"
+import Products from "./Components/Products"
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -77,6 +72,3 @@ const App = () => {
 
 
 export default App;
-
-
-

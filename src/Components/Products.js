@@ -24,7 +24,6 @@ const Products = () => {
     setCartItems(updatedCartItems);
     dispatch(removeFromCartSlice(productId))
   };
-
   const handleUpdateCartQty = (product, delta) => {
     const updatedCartItems = updateQty(cartItems, product, delta);
     setCartItems(updatedCartItems);

@@ -28,7 +28,6 @@ const Header = () => {
             <Link className="no-underline py-2 px-3" to="/product">
               Products
             </Link>
-
             <Link className="no-underline py-2 px-3" to="/register">
               Register
             </Link>
